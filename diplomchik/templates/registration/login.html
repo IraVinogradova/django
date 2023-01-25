@@ -1,0 +1,55 @@
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ГосУслугиРитуал {% endblock title %}
+
+
+{% block content %}
+<div class="index_login">
+<!--Обработка ошибок входа -->
+{% if form.errors %}
+    <p> Ваше имя или пароль не совпали. Пожалуйста, введите верный логин и пароль  </p>
+    <p class="index_img"> <img style="width: 350px;" src="{%static 'images/error.jpeg'%}"> </p>
+{% endif %}
+
+
+
+<!-- вход обработки ошибок (показывать форму или нет) -->
+{% if user.is_authenticated %}
+
+<p>Вы уже вошли в аккаунт</p>
+{% else %}
+    {% if not form.errors %}
+
+    <p class="index_img"> <img style="width: 350px;" src="{%static 'images/login.jpg'%}"> </p>
+    {% endif %}
+<p>
+            <form method="post", action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr><td>{{  form.username.label_tag }}</td> <td>{{ form.username }}</td> </tr>
+            <tr><td>{{ form.password.label_tag }}  </td> <td>{{ form.password }}</td></tr>
+            <tr><td> <input type="submit" value="Вход">
+                <input type="hidden" name="next" value="{{ next }}">
+
+            </td> <td><a href="{% url 'password_reset' %}"> Сбросить пароль</a></td></tr>
+        </table>
+
+
+
+
+        </form>
+
+</p>
+
+{% endif %}
+
+</div>
+{% endblock content %}
+{% block footer %} {% endblock footer %}
+
+

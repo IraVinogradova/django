@@ -1,0 +1,20 @@
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ГосУслугиРитуал {% endblock title %}
+
+
+{% block content %}
+<div class="index_login">
+<p >выход из системы</p>
+
+<a href="{% url 'login' %}">Нажмите для входа в аккаунт</a>
+</div>
+{% endblock content %}
+
+
+{% block footer %} {% endblock footer %}

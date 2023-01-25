@@ -1,0 +1,56 @@
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ГосУслугиРитуал {% endblock title %}
+
+
+{% block content %}
+
+<div class="index_login">
+{% if form.errors %}
+    <p> Error #1  </p>
+
+{% endif %}
+
+
+
+<!-- вход обработки регистрации (показывать форму или нет) -->
+
+{% if user.is_authenticated %}
+
+
+<p>Выполните выход для новой регистрации</p>
+{% else %}
+                {% if mode == "GET" %}
+<p>
+            <form method="post", action="{% url 'registration' %}"> <!-- action - метод, который будет обробатывать форму -->
+        {% csrf_token %}
+        <table>
+            {{ form }}
+
+        </table>
+<input type="submit"  value="Зарегестрироваться">
+
+   {% else %}
+             <p>Вы успешно зарегестрированы</p>
+            <br>
+            <a href="{% url 'index' %}"> На главную </a>
+
+        </form>
+
+</p>
+
+
+{% endif %}
+
+{% endif %}
+
+</div>
+{% endblock content %}
+
+
+

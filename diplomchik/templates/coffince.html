@@ -1,0 +1,64 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ГосУслугиРитуал {% endblock title %}
+
+{% block menu %}     {% endblock menu %}
+
+
+{% block content %}
+
+<section class="article_content">
+    <div >
+        <p>Доступные для заказа товары гробов:</p>
+
+        <!-- Пытаюсь получить скидку -->
+
+
+    </div>
+    {% if prod_catalog %}
+     {% for article in prod_catalog %}
+          {% if article.display %}
+    <table>
+<tr>
+    <td> <img style=" hight: 150 px; width: 150px;" src='/media/{{ article.cover }}'> </td>
+    <td> <a href="/article_desc/{{ article.id }}"> {{ article.name  }} | </a>  </td>
+    {% if user.get_username %}
+{% for skidka in skid %}
+        {% if user.id == skidka.user_id %} <td> <b> Цена </b>  {{  100|min:skidka.skidka|mod:article.price|div:100  }}  рублей
+     </td> {% endif %}
+    {% endfor %}
+     <td> {{ article.price }} </td>
+    {% else %}
+        <td> {{ article.price }} </td>
+    {% endif %}
+
+
+        {% if user.get_username == "mod" %}
+    <td> <a href="/hidden/{{ article.id }}">Скрыть </a> </td>
+        {% endif %}
+     <br>
+    <hr>
+</tr>
+        {% endif %}
+
+       {% endfor %}
+
+          {% else %}
+    <P>В базе нет товаров</P>
+    {% endif %}
+
+
+
+
+   </table>
+</div>
+</section>
+
+
+
+
+{% endblock %}
+

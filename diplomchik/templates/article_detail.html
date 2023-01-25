@@ -1,0 +1,38 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ГосУслугиРитуал {% endblock title %}
+
+{% block menu %}     {% endblock menu %}
+
+
+{% block content %}
+<section class="article_content">
+ <table>
+
+
+<tr>
+    <td> <img style=" hight: 350 px; width: 350px;" src='/media/{{ descr.cover }}'> </td>
+    <td>  {{ descr.name  }} |  </td>
+     {% if user.is_authenticated %}
+   {% for skidka in skid %}
+        {% if user.id == skidka.user_id %} <td> <b> Цена </b>  {{  100|min:skidka.skidka|mod:descr.price|div:100  }}  рублей </td> {% endif %}
+    {% endfor %}
+
+    {% else %}
+    <td> <b> Цена </b>{{ descr.price }}  рублей |</td>
+    {% endif %}
+    <td> {{ descr.descr }} </td>
+        {% if user.get_username == "mod" %}
+    <td> <a href="/hidden/{{ article.id }}">Скрыть </a> </td>
+        {% endif %}
+     <br>
+</tr>
+
+   </table>
+
+    </section>
+{% endblock %}
+
