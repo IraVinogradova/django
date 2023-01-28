@@ -24,34 +24,16 @@ def min(fir_div,second_div):
     divide = (fir_div - second_div)
     return divide
 
-#import pandas
-#import pandas as jtp
-
-
-#def read_xlx():
-    #excel_data_df = pandas.read_excel('1.xlsx', sheet_name='Лист1',)
-    #temp = jtp.DataFrame(excel_data_df)
-    #list_data = temp.values.tolist()
-
-
-    #to_write= (list(map(''.join,list_data)))
-
-    #for i in to_write:
-        #Companys.objects.create(name=i)
 
 
 
 
 
-    #return excel_data_df
 
-# def totalprice (article_id,skidka_id):
-#
-#     #client = User.objects.get(id=user_id)
-#     skidka = Skidka.objects.get(id=skidka_id)
-#     article = Article.objects.get(id=article_id)
-#     total = article.price-(article.price*(skidka.skidka/100))
-#     return total
+
+
+
+
 
 
 
@@ -64,7 +46,8 @@ def index(request):
     name_prod = Article.objects.all().count()
     num_visits = request.session.get('num_visits',0)
     request.session['num_visits'] = num_visits +1
-    context = {'name_prod': name_prod,'num_visits':num_visits,'klient':klient}
+    bbf = BbForm()
+    context = {'name_prod': name_prod,'num_visits':num_visits,'klient':klient, 'form':bbf}
 
 
     return render(request, "index.html", context=context)
